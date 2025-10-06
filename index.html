@@ -9,7 +9,7 @@
         /* == 変数定義: 鮮やかなネオンと深みのある背景 == */
         :root {
             --bg-deep: #05001a;        /* 宇宙のように深い背景 */
-            --bg-trans: rgba(10, 0, 30, 0.7); /* 半透明パネル */
+            --bg-trans: rgba(10, 0, 30, 0.8); /* 半透明パネルを少し濃く */
             --text-light: #e0f7fa;    /* 明るいテキスト */
             --main-neon: #00e5ff;      /* メインネオン (アクア) */
             --accent-neon: #ff0077;    /* アクセントネオン (フューシャ) */
@@ -26,10 +26,9 @@
             0% { text-shadow: 0 0 5px var(--main-neon), 0 0 10px var(--main-neon); }
             100% { text-shadow: 0 0 10px var(--main-neon), 0 0 20px var(--main-neon), 0 0 30px var(--shadow-light); }
         }
-        /* @keyframes live-pulse の定義を削除 */
         @keyframes pulse {
             0% { transform: scale(1.0); }
-            100% { transform: scale(1.02); }
+            100% { transform: scale(1.01); } /* 脈動を控えめに */
         }
         @keyframes button-hover-glow {
             0% { box-shadow: 0 0 5px var(--accent-neon); }
@@ -43,12 +42,12 @@
             padding: 0;
             background-color: var(--bg-deep);
             color: var(--text-light);
-            line-height: 1.7;
+            line-height: 1.6; 
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            /* パーティクルとノイズを合成した背景 */
+            /* パーティクルとノイズを合成した背景を維持 */
             background-image: 
                 radial-gradient(circle at center, rgba(0, 229, 255, 0.05) 0%, rgba(5, 0, 26, 1) 70%),
                 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="1" result="t"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" fill="transparent"/><rect width="100%" height="100%" fill="#0a011a" style="mix-blend-mode: overlay; opacity: 0.1;" filter="url(%23n)"/></svg>');
@@ -58,8 +57,8 @@
 
         /* == ヘッダー (フローティング・ナビゲーター) == */
         header {
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px); /* ガラスのような透明感 */
+            background-color: rgba(0, 0, 0, 0.75); 
+            backdrop-filter: blur(8px); 
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -70,7 +69,7 @@
         .header-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 18px 30px;
+            padding: 15px 30px; 
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -79,9 +78,9 @@
         header h1 {
             margin: 0;
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
+            font-size: 2.2em; 
             color: var(--main-neon);
-            letter-spacing: 5px;
+            letter-spacing: 3px; 
             animation: neon-glow 1.5s infinite alternate;
         }
         header h1 span {
@@ -91,35 +90,35 @@
         nav a {
             color: var(--text-light);
             text-decoration: none;
-            margin-left: 40px;
+            margin-left: 30px; 
             font-weight: 400;
-            font-size: 1.1em;
+            font-size: 1.05em;
             transition: color 0.3s, text-shadow 0.3s;
         }
 
         nav a:hover {
             color: var(--main-neon);
-            text-shadow: 0 0 10px var(--main-neon);
+            text-shadow: 0 0 8px var(--main-neon);
         }
 
         /* == メインコンテナ == */
         .container {
-            max-width: 1400px; /* 全体の幅を広く */
+            max-width: 1200px; 
             margin: 50px auto;
             padding: 0 30px;
             flex-grow: 1;
         }
         
-        /* == ヒーローセクション (巨大な投影スクリーン) == */
+        /* == ヒーローセクション == */
         #hero-container {
             background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(255, 0, 119, 0.1));
             border: 3px solid var(--main-neon);
             box-shadow: 0 0 30px var(--shadow-light);
             margin-bottom: 70px;
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px; 
             position: relative;
-            /* ヒーローセクションの背景にグリッドライン */
+            /* グリッドラインを維持 */
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 repeating-linear-gradient(0deg, var(--main-neon), var(--main-neon) 1px, transparent 1px, transparent 25px), 
@@ -129,109 +128,96 @@
 
         #hero-text h2 {
             font-family: 'Teko', sans-serif;
-            font-size: 6em; /* 非常に巨大に */
+            font-size: 4.5em; 
             color: var(--text-light);
-            margin: 0 0 20px;
-            line-height: 1;
-            text-shadow: 0 0 15px var(--main-neon), 0 0 30px var(--shadow-light);
-            letter-spacing: 10px;
+            margin: 0 0 15px;
+            line-height: 1.1;
+            text-shadow: 0 0 12px var(--main-neon), 0 0 25px var(--shadow-light);
+            letter-spacing: 5px; 
         }
         #hero-text p {
-            font-size: 1.5em;
+            font-size: 1.3em;
             color: var(--accent-neon);
-            margin-bottom: 50px;
-            text-shadow: 0 0 8px var(--shadow-dark);
+            margin-bottom: 40px;
+            text-shadow: 0 0 6px var(--shadow-dark);
         }
         
-        /* CTAボタン (コア・アクティベーション) */
+        /* CTAボタン */
         .cta-button {
             display: inline-block;
             background: linear-gradient(45deg, var(--main-neon), var(--accent-neon));
             color: var(--bg-deep);
             border: none;
-            padding: 18px 45px;
+            padding: 15px 40px; 
             font-weight: 700;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 1.1em;
             text-decoration: none;
             transition: all 0.3s ease-out;
             border-radius: 2px;
-            box-shadow: 0 0 15px var(--shadow-dark);
+            box-shadow: 0 0 10px var(--shadow-dark);
             position: relative;
             overflow: hidden;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             animation: pulse 1.5s infinite alternate;
         }
         .cta-button:hover {
             background: var(--accent-neon);
-            transform: scale(1.05) rotate(1deg);
+            transform: scale(1.03); 
             animation: button-hover-glow 0.8s infinite alternate;
         }
 
         /* == コンテンツセクション (ホログラフィック・パネル) == */
         section {
-            padding: 40px;
+            padding: 35px; 
             background-color: var(--bg-trans);
             backdrop-filter: blur(5px);
             border: 1px solid var(--main-neon);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             border-radius: 4px;
-            box-shadow: 0 0 15px var(--shadow-light);
+            box-shadow: 0 0 12px var(--shadow-light);
             transition: transform 0.3s ease;
         }
         section:hover {
-            transform: perspective(1000px) rotateX(1deg) translateY(-5px); /* 3D的な浮き上がり */
-            box-shadow: 0 0 25px var(--shadow-light), 0 0 10px var(--shadow-dark);
+            transform: perspective(1000px) rotateX(0.5deg) translateY(-3px); 
+            box-shadow: 0 0 20px var(--shadow-light), 0 0 8px var(--shadow-dark);
         }
 
         section h3 {
             font-family: 'Orbitron', sans-serif;
             color: var(--accent-neon);
-            border-bottom: 3px solid var(--main-neon);
-            padding-bottom: 15px;
+            border-bottom: 2px solid var(--main-neon); 
+            padding-bottom: 10px;
             margin-top: 0;
-            font-size: 2em;
-            text-shadow: 0 0 8px var(--shadow-dark);
+            font-size: 1.8em;
+            text-shadow: 0 0 6px var(--shadow-dark);
             letter-spacing: 1px;
         }
 
         /* ------------------ 最新動画セクション ------------------ */
-
-        /* 最新動画セクションを強調 */
         #latest-video {
-            padding: 50px; 
+            padding: 40px; 
             border: 3px solid var(--main-neon); 
-            box-shadow: 0 0 30px var(--shadow-light); 
-            margin-bottom: 50px;
+            box-shadow: 0 0 25px var(--shadow-light); 
+            margin-bottom: 40px;
         }
 
-        #latest-video h3 {
-            /* LIVEインジケーター削除に伴い、flex設定を削除してデフォルトのブロック要素に戻る */
-            border-bottom: 3px solid var(--accent-neon); 
-        }
-
-        /* 動画コンテナの強化 */
         #latest-video .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            margin-top: 35px;
-            border: 8px solid var(--main-neon); /* 極太フレーム */
-            box-shadow: 0 0 40px var(--shadow-light); /* 強力な光を放つ */
-            transition: box-shadow 0.5s ease;
-            transform: perspective(1000px) rotateX(1deg); /* わずかな3D傾斜でホログラム感 */
-        }
-        #latest-video .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+            margin-top: 25px;
+            border: 5px solid var(--main-neon); 
+            box-shadow: 0 0 30px var(--shadow-light); 
+            transform: perspective(1000px) rotateX(0.5deg); 
         }
         #latest-video .video-container:hover {
-            box-shadow: 0 0 50px var(--shadow-light), 0 0 20px var(--shadow-dark);
+            box-shadow: 0 0 40px var(--shadow-light), 0 0 15px var(--shadow-dark);
+        }
+
+        /* 動画下のテキストのネオングローを維持 */
+        #latest-video p:first-of-type {
+            text-shadow: 0 0 8px var(--main-neon);
+        }
+        #latest-video p a {
+            text-shadow: 0 0 8px var(--accent-neon) !important;
         }
 
         /* ------------------ 以下、その他セクション ------------------ */
@@ -242,60 +228,52 @@
             padding: 0;
         }
         .news-list li {
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-            padding: 15px 0;
-            display: flex;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15); 
+            padding: 12px 0; 
             align-items: center;
         }
         .news-list .date {
             color: var(--main-neon);
-            font-size: 1em;
-            margin-right: 25px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        .news-list a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .news-list a:hover {
-            color: var(--accent-neon);
-            text-shadow: 0 0 5px var(--accent-neon);
+            font-size: 0.95em;
+            margin-right: 20px;
         }
 
         /* 支援セクション */
         #support .cta-button {
-            margin-right: 20px;
-            margin-top: 15px;
-            padding: 15px 30px;
+            margin-right: 15px;
+            margin-top: 10px;
+            padding: 12px 25px;
         }
 
         /* == フッター (システムコア) == */
         footer {
             text-align: center;
-            padding: 30px 0;
-            background-color: #000000;
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            border-top: 2px solid var(--main-neon);
-            box-shadow: 0 0 15px var(--shadow-light);
+            padding: 25px 0; 
+            background-color: #111111; 
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85em;
+            border-top: 1px solid var(--main-neon); 
+            box-shadow: 0 0 10px var(--shadow-light);
             margin-top: auto;
         }
 
         /* == レスポンシブデザイン == */
         @media (max-width: 900px) {
             #hero-text h2 {
-                font-size: 4em;
+                font-size: 3.5em;
             }
         }
         @media (max-width: 600px) {
             #hero-text h2 {
-                font-size: 3em;
+                font-size: 2.5em;
+                letter-spacing: 2px;
             }
             .header-content {
                 flex-direction: column;
                 padding: 10px 20px;
+            }
+            header h1 {
+                font-size: 1.8em;
             }
             nav {
                 margin-top: 10px;
@@ -306,7 +284,15 @@
             nav a {
                 margin: 5px 10px;
             }
-            /* .live-indicator のスタイルを削除したため、このメディアクエリ内の調整も不要 */
+            /* CTAボタンのサイズ調整 */
+            .cta-button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+            #support .cta-button {
+                display: block;
+                margin: 10px auto;
+            }
         }
     </style>
 </head>
@@ -333,8 +319,7 @@
     <div class="container">
         
         <section id="latest-video">
-            <h3>
-                ::[最新動画] </h3>
+            <h3>最新動画</h3>
             
             <div class="video-container">
                 <iframe 
@@ -355,14 +340,14 @@
         </section>
         
         <section id="log">
-            <h3>:: [ニュース]</h3>
+            <h3>ニュース</h3>
             <ul class="news-list">
                 <li><span class="date">// 2025.10.04</span> <a href="https://tonziru-official.github.io/tonziru-official.com/" target="_blank">ホームページができました！</a></li>
-                </ul>
+            </ul>
         </section>
         
         <section id="support">
-            <h3>:: SUPPORT [支援]</h3>
+            <h3>SUPPORT 支援</h3>
             <p>このチャンネルの活動をサポートし、より深く関わりたい方はこちら。</p>
             <a href="https://www.youtube.com/channel/UCegnN26oCepuZu6Ym7bqZYw" target="_blank" class="cta-button" style="background: var(--main-neon); margin-right: 20px;">🔴 チャンネル登録する >></a>
             <a href="https://discord.gg/8jFukmtshp" target="_blank" class="cta-button" style="background: var(--accent-neon);">✨ サーバーに参加する >></a>
