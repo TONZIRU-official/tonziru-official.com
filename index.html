@@ -3,40 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TONZIRU</title>
+    <title>TONZIRU // HOLOGRAM OVERLORD SYSTEM CORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&family=Orbitron:wght@700&family=Noto+Sans+JP:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* == 変数定義: 鮮やかなネオンと深みのある背景 == */
         :root {
-            --bg-color: #0d0d1a;
-            --main-color: #00ffff;
-            --accent-color: #ffcc00;
-            --text-color: #f0f0f0;
-            --sub-text-color: #a0a0a0;
-            --box-shadow-color: rgba(0, 255, 255, 0.4);
+            --bg-deep: #05001a;        /* 宇宙のように深い背景 */
+            --bg-trans: rgba(10, 0, 30, 0.7); /* 半透明パネル */
+            --text-light: #e0f7fa;    /* 明るいテキスト */
+            --main-neon: #00e5ff;      /* メインネオン (アクア) */
+            --accent-neon: #ff0077;    /* アクセントネオン (フューシャ) */
+            --shadow-light: rgba(0, 229, 255, 0.6);
+            --shadow-dark: rgba(255, 0, 119, 0.6);
         }
 
+        /* == アニメーション定義 == */
+        @keyframes flow {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+        @keyframes neon-glow {
+            0% { text-shadow: 0 0 5px var(--main-neon), 0 0 10px var(--main-neon); }
+            100% { text-shadow: 0 0 10px var(--main-neon), 0 0 20px var(--main-neon), 0 0 30px var(--shadow-light); }
+        }
+        /* @keyframes live-pulse の定義を削除 */
+        @keyframes pulse {
+            0% { transform: scale(1.0); }
+            100% { transform: scale(1.02); }
+        }
+        @keyframes button-hover-glow {
+            0% { box-shadow: 0 0 5px var(--accent-neon); }
+            100% { box-shadow: 0 0 15px var(--accent-neon), 0 0 25px var(--shadow-dark); }
+        }
+
+        /* == 基本設定と背景 == */
         body {
-            font-family: 'Consolas', 'Courier New', monospace;
+            font-family: 'Noto Sans JP', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-deep);
+            color: var(--text-light);
             line-height: 1.7;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* パーティクルとノイズを合成した背景 */
+            background-image: 
+                radial-gradient(circle at center, rgba(0, 229, 255, 0.05) 0%, rgba(5, 0, 26, 1) 70%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="1" result="t"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" fill="transparent"/><rect width="100%" height="100%" fill="#0a011a" style="mix-blend-mode: overlay; opacity: 0.1;" filter="url(%23n)"/></svg>');
+            background-size: cover;
+            animation: flow 120s linear infinite;
         }
 
+        /* == ヘッダー (フローティング・ナビゲーター) == */
         header {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px); /* ガラスのような透明感 */
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 3px solid var(--accent-color);
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+            border-bottom: 2px solid var(--accent-neon);
+            box-shadow: 0 0 15px rgba(255, 0, 119, 0.4);
         }
         
         .header-content {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 15px 20px;
+            padding: 18px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,114 +78,150 @@
 
         header h1 {
             margin: 0;
-            font-size: 1.8em;
-            color: var(--main-color);
-            text-shadow: 0 0 5px var(--main-color);
-            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            color: var(--main-neon);
+            letter-spacing: 5px;
+            animation: neon-glow 1.5s infinite alternate;
         }
         header h1 span {
-            color: var(--accent-color);
+            color: var(--accent-neon);
         }
 
         nav a {
-            color: var(--text-color);
+            color: var(--text-light);
             text-decoration: none;
-            margin-left: 30px;
-            font-weight: bold;
+            margin-left: 40px;
+            font-weight: 400;
+            font-size: 1.1em;
             transition: color 0.3s, text-shadow 0.3s;
         }
 
         nav a:hover {
-            color: var(--accent-color);
-            text-shadow: 0 0 8px var(--accent-color);
+            color: var(--main-neon);
+            text-shadow: 0 0 10px var(--main-neon);
         }
 
+        /* == メインコンテナ == */
         .container {
-            max-width: 1000px;
+            max-width: 1400px; /* 全体の幅を広く */
             margin: 50px auto;
-            padding: 0 20px;
+            padding: 0 30px;
+            flex-grow: 1;
         }
         
+        /* == ヒーローセクション (巨大な投影スクリーン) == */
         #hero-container {
-            margin-bottom: 40px;
-            border-bottom: 5px solid var(--accent-color);
-            background-color: var(--bg-color);
-        }
-        
-        #hero-image {
-            width: 100%;
-            height: auto;
-            background-image: url('https://yt3.googleusercontent.com/sKeMLnzP97Opdcnbgub0rzWNmh-kJ_By2f6PbLJhM_Lne2Ns7AZeB6-emCGWevAUECfgAabK=s160-c-k-c0x00ffffff-no-rj');
-            background-size: cover;
-            background-position: center;
-            aspect-ratio: 4 / 1;
-        }
-
-        #hero-text {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(255, 0, 119, 0.1));
+            border: 3px solid var(--main-neon);
+            box-shadow: 0 0 30px var(--shadow-light);
+            margin-bottom: 70px;
             text-align: center;
-            padding: 50px 20px;
-            background-color: rgba(0, 0, 0, 0.6);
+            padding: 80px 20px;
+            position: relative;
+            /* ヒーローセクションの背景にグリッドライン */
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                repeating-linear-gradient(0deg, var(--main-neon), var(--main-neon) 1px, transparent 1px, transparent 25px), 
+                repeating-linear-gradient(90deg, var(--main-neon), var(--main-neon) 1px, transparent 1px, transparent 25px);
+            background-size: cover, 100% 100%, 100% 100%;
         }
 
         #hero-text h2 {
-            font-size: 3.5em;
-            color: var(--main-color);
-            text-shadow: 0 0 15px var(--box-shadow-color);
-            margin: 0 0 15px;
-            line-height: 1.2;
+            font-family: 'Teko', sans-serif;
+            font-size: 6em; /* 非常に巨大に */
+            color: var(--text-light);
+            margin: 0 0 20px;
+            line-height: 1;
+            text-shadow: 0 0 15px var(--main-neon), 0 0 30px var(--shadow-light);
+            letter-spacing: 10px;
         }
         #hero-text p {
-            font-size: 1.3em;
-            color: var(--accent-color);
-            margin-bottom: 30px;
+            font-size: 1.5em;
+            color: var(--accent-neon);
+            margin-bottom: 50px;
+            text-shadow: 0 0 8px var(--shadow-dark);
         }
         
+        /* CTAボタン (コア・アクティベーション) */
         .cta-button {
             display: inline-block;
-            background: var(--accent-color);
-            color: var(--bg-color);
+            background: linear-gradient(45deg, var(--main-neon), var(--accent-neon));
+            color: var(--bg-deep);
             border: none;
-            padding: 15px 30px;
-            font-weight: bold;
+            padding: 18px 45px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.2em;
             text-decoration: none;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 0 10px var(--accent-color);
+            transition: all 0.3s ease-out;
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--shadow-dark);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite alternate;
         }
         .cta-button:hover {
-            background: var(--main-color);
-            box-shadow: 0 0 15px var(--main-color);
-            transform: translateY(-2px);
+            background: var(--accent-neon);
+            transform: scale(1.05) rotate(1deg);
+            animation: button-hover-glow 0.8s infinite alternate;
         }
 
+        /* == コンテンツセクション (ホログラフィック・パネル) == */
         section {
-            padding: 30px;
-            background-color: rgba(18, 18, 36, 0.5);
-            border: 1px solid var(--main-color);
-            margin-bottom: 30px;
-            box-shadow: 0 0 5px var(--main-color), 0 0 10px var(--box-shadow-color);
+            padding: 40px;
+            background-color: var(--bg-trans);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--main-neon);
+            margin-bottom: 40px;
             border-radius: 4px;
+            box-shadow: 0 0 15px var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+        section:hover {
+            transform: perspective(1000px) rotateX(1deg) translateY(-5px); /* 3D的な浮き上がり */
+            box-shadow: 0 0 25px var(--shadow-light), 0 0 10px var(--shadow-dark);
         }
 
         section h3 {
-            color: var(--main-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-neon);
+            border-bottom: 3px solid var(--main-neon);
+            padding-bottom: 15px;
             margin-top: 0;
-            text-shadow: 0 0 5px var(--main-color);
+            font-size: 2em;
+            text-shadow: 0 0 8px var(--shadow-dark);
             letter-spacing: 1px;
-            font-size: 1.5em;
         }
-        
+
+        /* ------------------ 最新動画セクション ------------------ */
+
+        /* 最新動画セクションを強調 */
+        #latest-video {
+            padding: 50px; 
+            border: 3px solid var(--main-neon); 
+            box-shadow: 0 0 30px var(--shadow-light); 
+            margin-bottom: 50px;
+        }
+
+        #latest-video h3 {
+            /* LIVEインジケーター削除に伴い、flex設定を削除してデフォルトのブロック要素に戻る */
+            border-bottom: 3px solid var(--accent-neon); 
+        }
+
+        /* 動画コンテナの強化 */
         #latest-video .video-container {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
             height: 0;
-            margin-top: 20px;
+            margin-top: 35px;
+            border: 8px solid var(--main-neon); /* 極太フレーム */
+            box-shadow: 0 0 40px var(--shadow-light); /* 強力な光を放つ */
+            transition: box-shadow 0.5s ease;
+            transform: perspective(1000px) rotateX(1deg); /* わずかな3D傾斜でホログラム感 */
         }
-
         #latest-video .video-container iframe {
             position: absolute;
             top: 0;
@@ -159,54 +229,84 @@
             width: 100%;
             height: 100%;
             border: none;
-            box-shadow: 0 0 15px var(--main-color);
+        }
+        #latest-video .video-container:hover {
+            box-shadow: 0 0 50px var(--shadow-light), 0 0 20px var(--shadow-dark);
         }
 
+        /* ------------------ 以下、その他セクション ------------------ */
+        
+        /* ニュースリスト */
         .news-list {
             list-style: none;
             padding: 0;
         }
         .news-list li {
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-            padding: 12px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
         }
         .news-list .date {
-            color: var(--sub-text-color);
-            margin-right: 15px;
-            font-weight: bold;
+            color: var(--main-neon);
+            font-size: 1em;
+            margin-right: 25px;
+            font-weight: 700;
+            flex-shrink: 0;
         }
         .news-list a {
-            color: var(--text-color);
+            color: var(--text-light);
             text-decoration: none;
             transition: color 0.3s;
         }
         .news-list a:hover {
-            color: var(--main-color);
+            color: var(--accent-neon);
+            text-shadow: 0 0 5px var(--accent-neon);
         }
 
+        /* 支援セクション */
+        #support .cta-button {
+            margin-right: 20px;
+            margin-top: 15px;
+            padding: 15px 30px;
+        }
+
+        /* == フッター (システムコア) == */
         footer {
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 0;
             background-color: #000000;
-            color: var(--sub-text-color);
+            color: var(--text-secondary);
             font-size: 0.9em;
-            border-top: 1px solid var(--main-color);
+            border-top: 2px solid var(--main-neon);
+            box-shadow: 0 0 15px var(--shadow-light);
+            margin-top: auto;
         }
 
-        @media (max-width: 768px) {
+        /* == レスポンシブデザイン == */
+        @media (max-width: 900px) {
+            #hero-text h2 {
+                font-size: 4em;
+            }
+        }
+        @media (max-width: 600px) {
+            #hero-text h2 {
+                font-size: 3em;
+            }
             .header-content {
                 flex-direction: column;
                 padding: 10px 20px;
             }
             nav {
                 margin-top: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             nav a {
-                margin: 0 8px;
+                margin: 5px 10px;
             }
-            #hero-text h2 {
-                font-size: 2.5em;
-            }
+            /* .live-indicator のスタイルを削除したため、このメディアクエリ内の調整も不要 */
         }
     </style>
 </head>
@@ -214,30 +314,27 @@
 
     <header>
         <div class="header-content">
-            <h1>TONZIRU <span> official</span></h1>
+            <h1>TONZIRU <span>OVERLORD</span></h1>
             <nav>
-                <a href="#latest-video">最新動画</a>
-                <a href="#log">活動ログ</a>
+                <a href="#latest-video">最新動画</a> <a href="#log">活動ログ</a>
                 <a href="#support">コミュニティ</a>
             </nav>
         </div>
     </header>
 
     <div id="hero-container">
-        <div id="hero-image">
-        </div>
-        
         <div id="hero-text">
             <h2>新しい世界へ。<br>新しい世界を。</h2>
             <p>新しい世界を多分作る</p>
             <a href="https://www.youtube.com/channel/UCegnN26oCepuZu6Ym7bqZYw" target="_blank" class="cta-button">YouTubeチャンネルをチェック >></a>
         </div>
     </div>
-    
+
     <div class="container">
         
         <section id="latest-video">
-            <h3>:: 最新動画</h3>
+            <h3>
+                ::[最新動画] </h3>
             
             <div class="video-container">
                 <iframe 
@@ -251,32 +348,32 @@
                 </iframe>
             </div>
             
-            <p style="text-align: center; margin-top: 15px;">【最新動画】 「どのゲームがキルをするのが一番早いか[Hive]」</p>
+            <p style="text-align: center; margin-top: 25px; color: var(--main-neon); font-size: 1.1em; text-shadow: 0 0 5px var(--main-neon);">
+                【最新投稿】 どのゲームがキルをするのが一番早いか[Hive] </p>
+            <p style="text-align: center; font-size: 1em; margin-top: 10px;">
+                <a href="https://www.youtube.com/watch?v=MTydyQD2bDo" target="_blank" style="color: var(--accent-neon); text-decoration: none; text-shadow: 0 0 5px var(--accent-neon);">>> 動画をフルスクリーンで再生する (YouTubeへ) <<</a> </p>
         </section>
         
         <section id="log">
-            <h3>:: ニュース</h3>
+            <h3>:: [ニュース]</h3>
             <ul class="news-list">
-                <li><span class="date">2025.10.04</span> <a href="https://tonziru-official.github.io/tonziru-official.com/" target="_blank">ホームページができました！</a></li>
+                <li><span class="date">// 2025.10.04</span> <a href="https://tonziru-official.github.io/tonziru-official.com/" target="_blank">ホームページができました！</a></li>
                 </ul>
         </section>
         
         <section id="support">
-            <h3>:: 支援</h3>
+            <h3>:: SUPPORT [支援]</h3>
             <p>このチャンネルの活動をサポートし、より深く関わりたい方はこちら。</p>
-            <a href="https://www.youtube.com/channel/UCegnN26oCepuZu6Ym7bqZYw" target="_blank" class="cta-button" style="background: var(--accent-color); color: var(--bg-color); margin-right: 10px;">🔴 チャンネル登録する >></a>
-            <a href="https://discord.gg/8jFukmtshp" target="_blank" class="cta-button" style="background: var(--main-color); color: var(--bg-color); border: 1px solid var(--accent-color);">✨ サーバーに参加する >></a>
+            <a href="https://www.youtube.com/channel/UCegnN26oCepuZu6Ym7bqZYw" target="_blank" class="cta-button" style="background: var(--main-neon); margin-right: 20px;">🔴 チャンネル登録する >></a>
+            <a href="https://discord.gg/8jFukmtshp" target="_blank" class="cta-button" style="background: var(--accent-neon);">✨ サーバーに参加する >></a>
         </section>
 
     </div>
 
     <footer>
-        <p>TONZIRU // DATA STREAM ONLINE // Copyright (C) 2025. All Rights Reserved. (tonziruJP)</p>
+        <p>TONZIRU // HOLOGRAM SYSTEM ONLINE // Copyright (C) 2025. All Rights Reserved. (tonziruJP)</p>
     </footer>
 
 </body>
 
 </html>
-
-
-
